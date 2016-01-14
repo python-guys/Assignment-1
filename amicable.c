@@ -1,63 +1,28 @@
-//Using Thabit ibn Quarra theorem
-
 #include<stdio.h>
-#include<math.h>
-
-int prime(int);
 
 int main()
 {
-	int s, t, a, b, c, p = 0, q = 0, r = 0, n = 2;
-	printf("Set of amicable numbers(0-1000):\n");
-	while( pow(2, n) * p * q <= 1000)
+	int a, b, i, j, s1 = 0, s2 = 0;
+	printf("Amicable Numbers(0 - 1000):\n");
+	for(i = 1; i <= 1000; i++)
 	{
-		a = 3 * pow(2, n - 1) - 1;
-		if(prime(a))
+		for(j= i; j <= 1000; j++)
 		{
-			p = a;
-			b = 3 * pow(2, n) - 1;
-			if(prime(b))
+			for(a = 1; a < i; a++)
 			{
-				q = b;
-				c = 9 * pow(2, 2 * n - 1) -1;
-				if(prime(c))
-				{
-					r = c;
-					s = pow(2, n) * p * q;
-					t = pow(2, n) * r;
-					printf("\t%d  %d\n", s, t);
-				}
+				if(i % a == 0)
+					s1 = s1 + a;
 			}
+			for(b = 1; b < j; b++)
+			{
+				if(j % b == 0)
+					s2 = s2 + b;
+			}
+			if(s1 == j && s2 == i && i != j)
+				printf("\t%d  %d\n", i, j);
+			s1 = 0;
+			s2 = 0;
 		}
-		n++;
 	}
 	return 0;
 }
-					
-
-
-
-
-
-
-
-int prime(int a) 
-{
-	int i, t;
-	for(i = 2; i < sqrt(a); i++) {
-		t = (a % i);
-		if(t == 0) {
-		break;
-		}
-	}
-	if(t == 0) 
-		return 0;
-	else 
-		return 1;
-}
-
-
-		
-
-		
-
